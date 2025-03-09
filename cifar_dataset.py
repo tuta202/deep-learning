@@ -24,9 +24,9 @@ class CIFARDataset(Dataset):
     return len(self.labels)
 
   def __getitem__(self, idx):
-    image = np.reshape(self.images[idx], (3, 32, 32))
+    image = np.reshape(self.images[idx], (3, 32, 32)).astype(np.float32)
     label = self.labels[idx]
-    return image, label
+    return image/255., label
 
 if __name__ == '__main__':
   dataset = CIFARDataset(root="data/cifar-10-batches-py", train=True)
