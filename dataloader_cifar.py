@@ -15,7 +15,7 @@ if __name__ == '__main__':
   training_dataloader = DataLoader(
     dataset=training_data,
     batch_size=1000,
-    num_workers=4,
+    num_workers=-1,
     shuffle=True,
     drop_last=False, 
   )
