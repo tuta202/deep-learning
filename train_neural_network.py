@@ -60,9 +60,9 @@ if __name__ == '__main__':
       outputs = model(images)
       loss_value = criterion(outputs, labels)
 
-      # In loss sau mỗi 10 batch (hiện tại bị comment)
-      # if iter + 1 % 10:
-      print("Epoch {}/{}. Iteration {}/{}. Loss {}".format(epoch+1, num_epochs, iter+1, num_iters, loss_value))
+      # In loss sau mỗi 10 batch
+      if iter + 1 % 10:
+        print("Epoch {}/{}. Iteration {}/{}. Loss {}".format(epoch+1, num_epochs, iter+1, num_iters, loss_value))
 
       # Backward pass: Tính gradient và cập nhật trọng số
       optimizer.zero_grad()
