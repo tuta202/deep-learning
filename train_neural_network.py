@@ -81,6 +81,7 @@ if __name__ == '__main__':
         images = images.cuda()
         labels = labels.cuda()
 
+      # tất cả những gì trong khối no_grad sẽ ko tính gradient
       with torch.no_grad():  # Tắt gradient trong quá trình đánh giá
         predictions = model(images)  # Dự đoán (shape: 64x10)
         indices = torch.argmax(predictions.cpu(), dim=1)  # Lấy index có giá trị cao nhất
