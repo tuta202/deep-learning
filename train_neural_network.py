@@ -1,3 +1,4 @@
+import multiprocessing
 import torch.optim
 from torchvision.transforms import ToTensor
 from cifar_dataset import CIFARDataset
@@ -7,6 +8,8 @@ import torch.nn as nn
 from sklearn.metrics import classification_report
 
 if __name__ == '__main__':
+  num_workers = multiprocessing.cpu_count() - 1
+  
   # Số epoch để train mô hình
   num_epochs = 100
 
@@ -14,9 +17,9 @@ if __name__ == '__main__':
   train_dataset = CIFARDataset(root="./data", train=True)
   train_dataloader = DataLoader(
     dataset=train_dataset,
-    batch_size=64,
+    batch_size=32,
     shuffle=True,
-    num_workers=-1,
+    num_workers=num_workers,
     drop_last=True
   )
 
@@ -24,9 +27,9 @@ if __name__ == '__main__':
   test_dataset = CIFARDataset(root="./data", train=False)
   test_dataloader = DataLoader(
     dataset=test_dataset,
-    batch_size=64,
+    batch_size=32,
     shuffle=False,
-    num_workers=-1,
+    num_workers=num_workers,
     drop_last=False
   )
 
