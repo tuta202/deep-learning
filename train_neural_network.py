@@ -17,7 +17,7 @@ if __name__ == '__main__':
   train_dataset = CIFARDataset(root="./data", train=True)
   train_dataloader = DataLoader(
     dataset=train_dataset,
-    batch_size=32,
+    batch_size=64,
     shuffle=True,
     num_workers=num_workers,
     drop_last=True
@@ -27,7 +27,7 @@ if __name__ == '__main__':
   test_dataset = CIFARDataset(root="./data", train=False)
   test_dataloader = DataLoader(
     dataset=test_dataset,
-    batch_size=32,
+    batch_size=64,
     shuffle=False,
     num_workers=num_workers,
     drop_last=False
