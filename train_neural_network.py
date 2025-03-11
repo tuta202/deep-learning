@@ -9,9 +9,10 @@ from sklearn.metrics import classification_report
 
 if __name__ == '__main__':
   num_workers = multiprocessing.cpu_count() - 1
+  print(num_workers)
   
   # Số epoch để train mô hình
-  num_epochs = 100
+  num_epochs = 1000
 
   # Tạo dataset và dataloader cho tập train
   train_dataset = CIFARDataset(root="./data", train=True)
