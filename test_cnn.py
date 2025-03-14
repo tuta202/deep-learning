@@ -14,7 +14,7 @@ def get_args():
   return args
 
 if __name__ == '__main__':
-  categories = ["butterfly", "cat", "chicken", "cow", "dog", "elephant", "horse", "sheep", "spider", "squirrel"]
+  categories = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
   args = get_args()
   if torch.cuda.is_available():
     device = torch.device("cuda")
