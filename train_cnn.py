@@ -27,6 +27,11 @@ def get_args():
 if __name__ == '__main__':
   args = get_args()
   
+  if torch.cuda.is_available():
+    device = torch.device("cuda")
+  else:
+    device = torch.device("cpu") 
+    
   num_workers = int(multiprocessing.cpu_count() / 2)
   print(num_workers)
   
@@ -57,26 +62,30 @@ if __name__ == '__main__':
     
   writer = SummaryWriter(args.logging)
 
-  model = SimpleCNN(num_classes=10)
-
+  model = SimpleCNN(num_classes=10).to(device)
+  
   criterion = nn.CrossEntropyLoss()
 
   optimizer = torch.optim.SGD(model.parameters(), lr=1e-3, momentum=0.9)
 
+  if args.checkpoint:
+    checkpoint = torch.load(args.checkpoint)
+    start_epoch = checkpoint["epoch"]
+    model.load_state_dict(checkpoint["model"])
+    optimizer.load_state_dict(checkpoint["optimizer"])
+  else:
+    start_epoch = 0
+    
   num_iters = len(train_dataloader)
 
-  if torch.cuda.is_available():
-    model.cuda()
-
   best_acc = 0
-  for epoch in range(args.epochs):
+  for epoch in range(start_epoch, args.epochs):
     model.train()  
     progress_bar = tqdm(train_dataloader)
 
     for iter, (images, labels) in enumerate(progress_bar):
-      if torch.cuda.is_available():
-        images = images.cuda()
-        labels = labels.cuda()
+      images = images.to(device)
+      labels = labels.to(device)
 
       outputs = model(images)
       loss_value = criterion(outputs, labels)
@@ -94,9 +103,8 @@ if __name__ == '__main__':
 
     for iter, (images, labels) in enumerate(test_dataloader):
       all_labels.extend(labels)  
-      if torch.cuda.is_available():
-        images = images.cuda()
-        labels = labels.cuda()
+      images = images.to(device)
+      labels = labels.to(device)
 
       with torch.no_grad():  
         predictions = model(images) 
@@ -113,7 +121,7 @@ if __name__ == '__main__':
     # torch.save(model.state_dict(), "{}/last_cnn.pt".format(args.trained_models))
     checkpoint = {
       "epoch": epoch+1,
-      "model": model.state_dict(),
+      "model": model.state_dict(), # W của model
       "optimizer": optimizer.state_dict()
     }
     torch.save(checkpoint, "{}/last_cnn.pt".format(args.trained_models))
