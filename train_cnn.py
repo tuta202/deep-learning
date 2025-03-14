@@ -68,7 +68,7 @@ if __name__ == '__main__':
   else:
     device = torch.device("cpu") 
     
-  num_workers = int(multiprocessing.cpu_count())
+  num_workers = int(multiprocessing.cpu_count() / 2)
   print(num_workers)
   
   num_epochs = 100

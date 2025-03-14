@@ -8,7 +8,7 @@ import cv2
 def get_args():
   parser = ArgumentParser(description="CNN inference")
   parser.add_argument("--image-path", "-p", type=str, default=None)
-  parser.add_argument("--image-size", "-i", type=int, default=224, help="Image size")
+  parser.add_argument("--image-size", "-i", type=int, default=32, help="Image size")
   parser.add_argument("--checkpoint", "-c", type=str, default="trained_models/best_cnn.pt")
   args = parser.parse_args()
   return args
