@@ -7,6 +7,8 @@ import numpy as np
 
 class CIFARDataset(Dataset):
   def __init__(self, root="data", train=True):
+    self.categories = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+
     root = os.path.join(root, "cifar-10-batches-py")
     if train:
       data_files = [os.path.join(root, "data_batch_{}".format(i)) for i in range(1, 6)]
