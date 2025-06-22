@@ -14,6 +14,7 @@ import shutil
 import numpy as np
 import matplotlib.pyplot as plt
 
+'''
 def plot_confusion_matrix(writer, cm, class_names, epoch):
   """
   Returns a matplotlib figure containing the plotted confusion matrix.
@@ -47,7 +48,7 @@ def plot_confusion_matrix(writer, cm, class_names, epoch):
   plt.ylabel('True label')
   plt.xlabel('Predicted label')
   writer.add_figure('confusion_matrix', figure, epoch)
-    
+'''    
 def get_args():
   parser = ArgumentParser(description="CNN training")
   parser.add_argument("--root", "-r", type=str, default="./data", help="Root of the dataset")
@@ -151,7 +152,7 @@ if __name__ == '__main__':
 
     all_labels = [label.item() for label in all_labels]
     all_predictions = [prediction.item() for prediction in all_predictions]
-    plot_confusion_matrix(writer, confusion_matrix(all_labels, all_predictions), class_names=test_dataset.categories, epoch=epoch)
+    # plot_confusion_matrix(writer, confusion_matrix(all_labels, all_predictions), class_names=test_dataset.categories, epoch=epoch)
 
     print("best_acc", best_acc)
     accuracy = accuracy_score(all_labels, all_predictions)
