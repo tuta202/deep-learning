@@ -8,7 +8,7 @@ import torch.nn as nn
 from sklearn.metrics import classification_report
 
 if __name__ == '__main__':
-  num_workers = multiprocessing.cpu_count() - 1
+  num_workers = int(multiprocessing.cpu_count() / 2)
   print(num_workers)
   
   # Số epoch để train mô hình
