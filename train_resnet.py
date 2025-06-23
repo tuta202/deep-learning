@@ -67,7 +67,7 @@ if __name__ == '__main__':
   model.fc = nn.Linear(in_features, out_features=10)
   model = model.to(device)
   for name, param in model.named_parameters():
-    if "fc." not in name:
+    if not("fc." in name or "layer4." in name):
       param.requires_grad = False
   
   criterion = nn.CrossEntropyLoss()
