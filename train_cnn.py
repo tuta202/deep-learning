@@ -100,13 +100,17 @@ if __name__ == '__main__':
   writer = SummaryWriter(args.logging)
 
   model = SimpleCNN(num_classes=10).to(device)
+  # transfer learning
+  # for name, param in model.named_parameters():
+  #   if not("fc." in name or "layer4." in name):
+  #     param.requires_grad = False
   
   criterion = nn.CrossEntropyLoss()
 
   optimizer = torch.optim.SGD(model.parameters(), lr=1e-3, momentum=0.9)
 
   if args.checkpoint:
-    checkpoint = torch.load(args.checkpoint)
+    checkpoint = torch.load(args. checkpoint)
     start_epoch = checkpoint["epoch"]
     model.load_state_dict(checkpoint["model"])
     optimizer.load_state_dict(checkpoint["optimizer"])
