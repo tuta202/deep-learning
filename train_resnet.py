@@ -31,7 +31,7 @@ if __name__ == '__main__':
   else:
     device = torch.device("cpu") 
     
-  num_workers = int(multiprocessing.cpu_count() / 2)
+  num_workers = int(multiprocessing.cpu_count() - 2)
   print(num_workers)
   
   num_epochs = 100
@@ -62,7 +62,7 @@ if __name__ == '__main__':
   writer = SummaryWriter(args.logging)
 
   # train resnet
-  model = resnet50(weights=ResNet50_Weights.DEFAULT)
+  model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V2)
   in_features = model.fc.in_features
   model.fc = nn.Linear(in_features, out_features=10)
   model = model.to(device)
