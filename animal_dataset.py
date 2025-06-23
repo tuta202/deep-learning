@@ -2,6 +2,7 @@ from torch.utils.data import Dataset
 import os
 import cv2
 from PIL import Image
+import torch
 
 class AnimalDataset(Dataset):
   def __init__(self, root, train=True, transform=None):

@@ -21,7 +21,7 @@ if __name__ == '__main__':
   else:
     device = torch.device("cpu")
 
-  model = SimpleCNN(num_classes=10).to(device)
+  model = SimpleCNN(num_classes=len(categories)).to(device)
   if args.checkpoint:
     checkpoint = torch.load(args.checkpoint)
     model.load_state_dict(checkpoint["model"])
@@ -40,6 +40,9 @@ if __name__ == '__main__':
   with torch.no_grad():
     output = model(image)
     probs = softmax(output)
+  
+  print('output: ', output)
+  print('probs: ', probs)
 
   max_idx = torch.argmax(probs)
   predicted_class = categories[max_idx]

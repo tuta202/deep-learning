@@ -32,7 +32,7 @@ class CIFARDataset(Dataset):
     return image/255., label
 
 if __name__ == '__main__':
-  dataset = CIFARDataset(root="data/cifar-10-batches-py", train=True)
+  dataset = CIFARDataset(root="data", train=True)
   image, label = dataset.__getitem__(100)
   image = np.transpose(image, (1, 2, 0))
   cv2.imshow("image", cv2.resize(image, (320, 320)))
