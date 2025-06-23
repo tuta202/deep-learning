@@ -41,9 +41,6 @@ if __name__ == '__main__':
     output = model(image)
     probs = softmax(output)
   
-  print('output: ', output)
-  print('probs: ', probs)
-
   max_idx = torch.argmax(probs)
   predicted_class = categories[max_idx]
   print("The test image is about {} with confident score of {}".format(predicted_class, probs[0, max_idx]))
